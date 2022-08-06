@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Security.Permissions;
 using Aurora.Crypt;
 using NLog;
 
