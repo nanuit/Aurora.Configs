@@ -40,12 +40,21 @@ namespace Aurora.Configs
         /// </summary>
         Dynamic
     }
+    /// <summary>
+    /// handling config files in windows XML format
+    /// </summary>
     public class Config
     {            
         #region Static Members
+        /// <summary>
+        /// nlog instance
+        /// </summary>
         protected readonly Logger Log = LogManager.GetCurrentClassLogger();
         #endregion
         #region Private Members
+        /// <summary>
+        /// used config file path
+        /// </summary>
         protected string ConfigFilePath;
         #endregion
 
@@ -69,21 +78,32 @@ namespace Aurora.Configs
         public string EnvironmentVariable { get; set; }
         #endregion
         #region Public Methods  
+        /// <summary>
+        /// decode text
+        /// </summary>
+        /// <param name="cipher">text to decode</param>
+        /// <returns>decoded text</returns>
         public static  string Decode(string cipher)
         {
             return (RijndaelCrypt.Decrypt(cipher, AppIdentifier));
         }
+        /// <summary>
+        /// encode credentials password
+        /// </summary>
+        /// <param name="userId">username to encode</param>
+        /// <param name="password">password to encode</param>
+        /// <returns></returns>
         public static string Encode(string userId, string password)
         {
             return (RijndaelCrypt.Encrypt(password, AppIdentifier));
         }
         /// <summary>
-        /// 
+        /// compute the path to the config file according to the type <see cref="ConfigType"/>
         /// </summary>
-        /// <param name="type">specifies how the configfile is determined</param>
+        /// <param name="type">specifies how the config file is determined</param>
         /// <param name="configLocation">Location of the config file. used with ConfigType.Specific as folder for config File and with Config.EnvironmentVariable as the name of the environment variable to be used for retrieving the config file with Path</param>
         /// <param name="configFilename">Name of the config file. with ConfigType.Executeable if omitted the name of the executeable with ".config" is used. mandatory with ConfigType.Profile</param>
-        /// <returns>FullPath to the configfile</returns>
+        /// <returns>FullPath to the config file</returns>
         public string SetConfigFile(ConfigType type, string configLocation, string configFilename)
         {
             ConfigFilePath = string.Empty;
@@ -115,13 +135,13 @@ namespace Aurora.Configs
                         ConfigFilePath = GetConfigFromEnvironmentVariable();
                         if (!string.IsNullOrEmpty(ConfigFilePath))
                         {
-                            Log.Trace("Configfile from Environment {0}", ConfigFilePath);
+                            Log.Trace($"Configfile from Environment {ConfigFilePath}");
                             break;
                         }
                         ConfigFilePath = GetConfigFilefromExecutable(configFilename);
                         if (!string.IsNullOrEmpty(ConfigFilePath))
                         {
-                            Log.Trace("Configfile from Executeable {0}", ConfigFilePath);
+                            Log.Trace($"Configfile from Executeable {ConfigFilePath}");
                         }
                         break;
                 }
@@ -132,7 +152,7 @@ namespace Aurora.Configs
             }
             finally
             {
-                Log.Trace($"configFile to use {ConfigFilePath}");
+                Log.Warn($"configFile to use {ConfigFilePath}");
                 //Configuration = LoadConfiguration();
             }
             return (ConfigFilePath);

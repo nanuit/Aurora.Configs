@@ -22,10 +22,6 @@ namespace Aurora.Configs
         {
             LoadConfigurationFile();
         }
-        #endregion             
-        #region Private Members              
-        
-        //private string m_SectionName;
         #endregion
         #region Public Methods          
         public CustomConfigSection LoadSection(string sectionName)
@@ -78,7 +74,6 @@ namespace Aurora.Configs
             }
         }
         #endregion
-
         #region Private Methods
         private void LoadConfigurationFile()                                                                           
         {
