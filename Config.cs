@@ -85,7 +85,7 @@ namespace Aurora.Configs
         /// <returns>decoded text</returns>
         public static  string Decode(string cipher)
         {
-            return (RijndaelCrypt.Decrypt(cipher, AppIdentifier));
+            return (Encryption.Decrypt(cipher, AppIdentifier));
         }
         /// <summary>
         /// encode credentials password
@@ -95,7 +95,7 @@ namespace Aurora.Configs
         /// <returns></returns>
         public static string Encode(string userId, string password)
         {
-            return (RijndaelCrypt.Encrypt(password, AppIdentifier));
+            return (Encryption.Encrypt(password, AppIdentifier));
         }
         /// <summary>
         /// compute the path to the config file according to the type <see cref="ConfigType"/>

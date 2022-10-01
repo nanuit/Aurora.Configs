@@ -5,7 +5,7 @@
 		<AssemblyName>Aurora.Configs</AssemblyName>
 		<RootNamespace>Aurora.Configs</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.5</VersionPrefix>
+		<VersionPrefix>1.0.6</VersionPrefix>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -13,7 +13,7 @@
 		<Description>Configuration file access classes</Description>
 		<Copyright>Nanuit(c) 2022</Copyright>
 		<PackageIcon>nuget.png</PackageIcon>
-		<PackageReleaseNotes>Added .net5 and .net6 support</PackageReleaseNotes>
+		<PackageReleaseNotes>Encryption changed from Rijandael to Aes</PackageReleaseNotes>
 		<UseWindowsForms>False</UseWindowsForms>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
