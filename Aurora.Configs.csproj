@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net48;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net48;net5.0;net6.0;net7.0</TargetFrameworks>
 		<AssemblyName>Aurora.Configs</AssemblyName>
 		<RootNamespace>Aurora.Configs</RootNamespace>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.6</VersionPrefix>
+		<VersionPrefix>1.0.7</VersionPrefix>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Authors>Nanuit</Authors>
 		<Description>Configuration file access classes</Description>
 		<Copyright>Nanuit(c) 2022</Copyright>
 		<PackageIcon>nuget.png</PackageIcon>
-		<PackageReleaseNotes>Encryption changed from Rijandael to Aes</PackageReleaseNotes>
+		<PackageReleaseNotes>added net7.0 support</PackageReleaseNotes>
 		<UseWindowsForms>False</UseWindowsForms>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Nullable>enable</Nullable>
@@ -35,16 +35,15 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
-		<PackageReference Include="ServiceStack.Text" Version="6.2.0" />		
+		<PackageReference Include="ServiceStack.Text" Version="6.7.0" />		
 	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0' or '$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="ServiceStack.Text.Core" Version="6.2.0" />
-		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-
-	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' != 'net48'">
+		<PackageReference Include="ServiceStack.Text.Core" Version="6.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
+  </ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="5.0.1" />
-	</ItemGroup>
+		<PackageReference Include="NLog" Version="5.1.2" />
+  </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Aurora.Crypt\Aurora.Crypt.csproj" />
 		<ProjectReference Include="..\Aurora.IO\Aurora.IO.csproj" />
