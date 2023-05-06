@@ -45,7 +45,6 @@
 		<PackageReference Include="NLog" Version="5.1.2" />
   </ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Aurora.Crypt\Aurora.Crypt.csproj" />
 		<ProjectReference Include="..\Aurora.IO\Aurora.IO.csproj" />
 	</ItemGroup>
 	<ItemGroup>
