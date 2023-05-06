@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using Aurora.Crypt;
@@ -102,7 +103,7 @@ namespace Aurora.Configs
         /// </summary>
         /// <param name="type">specifies how the config file is determined</param>
         /// <param name="configLocation">Location of the config file. used with ConfigType.Specific as folder for config File and with Config.EnvironmentVariable as the name of the environment variable to be used for retrieving the config file with Path</param>
-        /// <param name="configFilename">Name of the config file. with ConfigType.Executeable if omitted the name of the executeable with ".config" is used. mandatory with ConfigType.Profile</param>
+        /// <param name="configFilename">Name of the config file. with ConfigType.Executeable if omitted the name of the executeable with ".config" is used. mandatory with ConfigType.Profile...</param>
         /// <returns>FullPath to the config file</returns>
         public string SetConfigFile(ConfigType type, string configLocation, string configFilename)
         {
@@ -117,6 +118,8 @@ namespace Aurora.Configs
                     case ConfigType.RoamingProfile:
                     case ConfigType.LocalProfile:
                     case ConfigType.CommonProfile:
+                        if (string.IsNullOrEmpty(configFilename))
+                            throw (new InvalidEnumArgumentException(nameof(configFilename)));
                         ConfigFilePath = GetProfileConfigFile(type, configLocation, configFilename);
                         break;
                     case ConfigType.Specific:
@@ -126,6 +129,7 @@ namespace Aurora.Configs
                         ConfigFilePath = GetConfigFromEnvironmentVariable(configLocation);
                         break;
                     case ConfigType.Dynamic:
+                        
                         ConfigFilePath = GetSpecificConfigFile(configLocation, configFilename);
                         if (!string.IsNullOrEmpty(ConfigFilePath))
                         {
@@ -149,6 +153,7 @@ namespace Aurora.Configs
             catch (Exception ex)
             {
                 Log.Error(ex, $"Error setting configfilename:{ex}");
+                throw;
             }
             finally
             {
@@ -169,7 +174,6 @@ namespace Aurora.Configs
         public Config(ConfigType type, string configLocation, string configFilename)
         {
             SetConfigFile(type, configLocation, configFilename);
-            
         }
         #endregion
         #region Private Methods
@@ -236,7 +240,7 @@ namespace Aurora.Configs
             }
             string configFilePath = Path.Combine(Environment.GetFolderPath(folderToUse), profilePath);
             configFilePath = Path.Combine(configFilePath, configFileName);
-            Aurora.IO.Directory.EnsureDirectory(configFilePath);
+            Aurora.IO.Directory.EnsureFileDirectory(configFilePath);
             return (configFilePath);
         }
         #endregion
