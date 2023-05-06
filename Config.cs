@@ -1,8 +1,9 @@
-﻿using NLog;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.IO;
 using System.Reflection;
+using Aurora.Crypt;
+using NLog;
 
 namespace Aurora.Configs
 {
