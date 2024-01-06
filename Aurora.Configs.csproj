@@ -42,7 +42,7 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="NLog" Version="5.2.0" />
+		<PackageReference Include="NLog" Version="5.2.7" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Aurora.Crypt\Aurora.Crypt.csproj" />
