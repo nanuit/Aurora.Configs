@@ -184,19 +184,23 @@ namespace Aurora.Configs
         /// <returns></returns>
         private string GetConfigFilefromExecutable(string fileName)
         {
-            Assembly rentyAss = Assembly.GetEntryAssembly();
-            
-            if (rentyAss == null)
-                rentyAss = Assembly.GetCallingAssembly();
-            if (rentyAss == null)
-                return (null);
+            string retVal;
+            string executeableDirectory = AppContext.BaseDirectory;
 
-            Uri executeable = new Uri(rentyAss.GetName().CodeBase);
-            string executeableDirectory = Path.GetDirectoryName(executeable.LocalPath);
-            string retVal = string.Empty;
+            if (string.IsNullOrEmpty(executeableDirectory))
+            {
+                Assembly rentyAss = Assembly.GetEntryAssembly() ?? Assembly.GetCallingAssembly(); 
+                if (rentyAss == null) { throw new InvalidOperationException("Unable to determine the executing assembly."); } 
+            
+                if (!string.IsNullOrEmpty(rentyAss.GetName().CodeBase))
+                {
+                    Uri executeable = new Uri(rentyAss.GetName().CodeBase);
+                    executeableDirectory = Path.GetDirectoryName(executeable.LocalPath);
+                }    
+            }
             
             if (string.IsNullOrEmpty(fileName))
-                retVal = executeable.LocalPath + ".config";
+                retVal = executeableDirectory + ".config";
             else
                 retVal = Path.Combine(executeableDirectory, fileName);
 
