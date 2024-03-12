@@ -52,14 +52,11 @@ namespace Aurora.Configs
         /// </summary>
         protected readonly Logger Log = LogManager.GetCurrentClassLogger();
         #endregion
-        #region Private Members
+        #region Properties
         /// <summary>
         /// used config file path
         /// </summary>
-        protected string ConfigFilePath;
-        #endregion
-
-        #region Properties
+        public string ConfigFilePath;
 
         /// <summary>
         /// Encryption application identifier
