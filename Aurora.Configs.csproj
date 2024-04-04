@@ -21,7 +21,6 @@
 	</PropertyGroup>
 	<PropertyGroup>
 		<PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
-		<DebugType>None</DebugType>
 		<GenerateDocumentationFile>false</GenerateDocumentationFile>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
